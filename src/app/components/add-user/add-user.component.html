@@ -1,0 +1,58 @@
+<div class="signin-content">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <p *ngIf="isAddMode">Add your details to sign up </p>
+            <p *ngIf="!isAddMode">Update Profile </p>
+            <div class="container">
+                <mat-form-field class="full-width-input">
+                    <input matInput placeholder="Full Name" formControlName="name">
+                    <mat-error *ngIf="form.get('name').errors?.['required'] && form.get('name').touched">Name is required</mat-error>
+                    <mat-error *ngIf="form.get('name').errors?.['pattern'] && form.get('name').touched">Name should only contain alphabets</mat-error>
+                    
+                </mat-form-field>
+        
+                <mat-form-field class="full-width-input">
+                    <input matInput placeholder="Email" formControlName="email">
+                    <mat-error *ngIf="form.get('email').errors?.['required'] && form.get('email').touched">Email is required</mat-error>
+                    <mat-error *ngIf="form.get('email').errors?.['email'] && form.get('email').touched">Please Enter correct Email</mat-error>
+                </mat-form-field>
+                
+                <mat-form-field class="full-width-input">
+                    <input matInput placeholder="Phone Number" formControlName="phone">
+                    <mat-error *ngIf="form.get('phone').errors?.['required'] && form.get('phone').touched">Phone Number is required</mat-error>
+                    <mat-error *ngIf="form.get('phone').errors?.['pattern'] && form.get('phone').touched">Please, Enter 10 digit Phone Number.</mat-error>
+                </mat-form-field>
+
+                
+                <mat-radio-group class="align-left" matInput aria-labelledby="gender" formControlName="gender">
+                    
+                    <mat-radio-button class="my-2" [checked]="true" value="male">Male</mat-radio-button>
+                    <mat-radio-button [checked]="false" value="female">Female</mat-radio-button>
+                </mat-radio-group>
+                
+                <ng-container *ngIf="isAddMode">
+                    <mat-form-field  class="full-width-input">
+                        <input matInput type="password" placeholder="Password" formControlName="password">
+                        <mat-error *ngIf="form.get('password').errors?.['required'] && form.get('password').touched">Password is required</mat-error>
+                        <mat-error *ngIf="form.get('password').errors?.['minlength'] && form.get('password').touched">Password should be of atleast 8 characters</mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field class="full-width-input">
+                        <input matInput type="password" placeholder="Password Confirmation" formControlName="confirmPassword">
+                        <mat-hint *ngIf="form.hasError('passwordsNotMatching') && form.get('confirmPassword').touched">Passwords do not match</mat-hint>
+                    </mat-form-field>
+
+                </ng-container>
+                
+                <small class="error" *ngIf="emailError">This Email Already Exists</small>
+                <button *ngIf="!isAddMode" mat-raised-button color="primary" [disabled]="!form.valid" type="submit">Update</button>
+                <button *ngIf="isAddMode" mat-raised-button color="primary" [disabled]="!form.valid" type="submit">Sign Up</button>
+                
+                <small *ngIf="isAddMode" class="pt-1">Already a user? <a href="/login">Login.</a>  </small>
+            </div>
+        </form>
+        
+      </mat-card-content>
+    </mat-card>
+  </div>

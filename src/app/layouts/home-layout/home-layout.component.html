@@ -1,0 +1,31 @@
+<div id="wrapper">
+  
+    <app-header (sideNavEvent)="sideNav.toggle()"></app-header> 
+    <mat-sidenav-container class="example-container" autosize>
+        <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true">
+            <mat-nav-list>
+                <mat-list-item [routerLink]="'/view-profile'" class="parent">
+                    <span class="full-width" >My Profile</span>
+                    <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+                    
+                </mat-list-item>
+                
+            </mat-nav-list>
+        <mat-nav-list>
+    </mat-nav-list>
+        </mat-sidenav>
+    
+        <mat-sidenav-content>
+      
+            <div class="example-sidenav-content" >
+              
+              
+              <router-outlet></router-outlet>
+            
+            </div>
+          </mat-sidenav-content>
+    
+    </mat-sidenav-container>
+    
+  
+  </div>

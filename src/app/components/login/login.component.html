@@ -1,0 +1,33 @@
+<div class="signin-content">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <p>Please login to continue</p>
+          <mat-form-field class="full-width-input">
+            <input matInput placeholder="Email" formControlName="userName" required>
+            
+            <mat-error *ngIf="form.get('userName').errors?.['required'] && form.get('userName').touched">
+              Email is required
+            </mat-error>
+            <mat-error *ngIf="form.get('userName').errors?.['email'] && form.get('userName').touched">
+              Please Enter correct Email
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width-input">
+            <input matInput type="password" placeholder="Password" formControlName="password" required>
+            <mat-error *ngIf="form.get('password').errors?.['required']  && form.get('password').touched">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="form.get('password').errors?.['minlength'] && form.get('password').touched">
+                
+              Password should not be less than 8 characters
+            </mat-error>
+            
+          </mat-form-field>
+          <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">Login</button>
+          <br>
+          <small class="pt-1">New to Crown? <a href="/sign-up">Sign Up.</a>  </small>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
